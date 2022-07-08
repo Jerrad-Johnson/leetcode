@@ -52,15 +52,35 @@ class LeetcodeChallenges {
         return finalArr;
     }
 
+    productExceptSelfV2(nums){
+        let arr = [...nums];
+        let memo = [];
+        let product = 1;
+        let response = [];
+
+        arr.forEach((item, index, array) => {
+            if (memo[item] === undefined){
+                let tempArr = [...arr]
+                tempArr.splice(index, 1)
+                product = tempArr.reduce((a, b) => a * b);
+                response.push(product)
+                memo[item] = product;
+            } else {
+                response.push(memo[item])
+            }
+        });
+        return response;
+    }
 }
 
 let leetcode = new LeetcodeChallenges;
-cc(leetcode.productExceptSelf([-1,1,0,-3,3]))
+cc(leetcode.productExceptSelfV2([-1,1,0,-3,3]))
 
 
 /*
 cc(leetcode.maxProfit([7,1,5,3,6,4]));
 cc(leetcode.twoSum([1, 3, 5, 7, 9, 11], 8))
 cc(leetcode.containsDuplicate([1,2,3]))
+cc(leetcode.productExceptSelf([-1,1,0,-3,3]))
 
 */
