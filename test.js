@@ -24,8 +24,25 @@ class LeetcodeChallenges {
             }
         }
     }
+
+    containsDuplicate(nums) {
+        let arr = [...nums];
+        for (let i = 0; i < arr.length; i++){
+            let count = arr.filter((e) => e === arr[i]);
+            if (count.length > 1) return true;
+        }
+        return false;
+    }
+
+
 }
 
 let leetcode = new LeetcodeChallenges;
+
+
+/*
 cc(leetcode.maxProfit([7,1,5,3,6,4]));
 cc(leetcode.twoSum([1, 3, 5, 7, 9, 11], 8))
+cc(leetcode.containsDuplicate([1,2,3]))
+
+*/
