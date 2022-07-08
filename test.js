@@ -2,7 +2,7 @@ let cc = console.log;
 
 class LeetcodeChallenges {
 
-    maxProfit(prices) {
+    maxProfit(prices){
         let difference = 0;
 
         for (let i = 0; i < prices.length; i++) {
@@ -15,7 +15,7 @@ class LeetcodeChallenges {
         return difference;
     }
 
-    twoSum(nums, target) {
+    twoSum(nums, target){
         for (let i = 0; i < nums.length; i++) {
             for (let j = 0; j < nums.length; j++) {
                 if (nums[i] + nums[j] == target && i !== j) {
@@ -25,7 +25,7 @@ class LeetcodeChallenges {
         }
     }
 
-    containsDuplicate(nums) {
+    containsDuplicate(nums){
         let arr = [...nums];
         for (let i = 0; i < arr.length; i++){
             let count = arr.filter((e) => e === arr[i]);
@@ -34,10 +34,28 @@ class LeetcodeChallenges {
         return false;
     }
 
+    productExceptSelf(nums){
+        let arr = [...nums];
+        let finalArr = [];
+
+        for (let i = 0; i < arr.length; i++){
+            let tempArr = [...arr]
+            let output = 1;
+            tempArr.splice(i, 1)
+            for (let j = 0; j < tempArr.length; j++){
+                output *= tempArr[j]
+            }
+            if (output === -0) output = 0
+        finalArr.push(output)
+        }
+
+        return finalArr;
+    }
 
 }
 
 let leetcode = new LeetcodeChallenges;
+cc(leetcode.productExceptSelf([-1,1,0,-3,3]))
 
 
 /*
