@@ -83,10 +83,16 @@ class LeetcodeChallenges {
         return largestFoundSum;
     }
 
+    isAnagram(s, t){
+        let splitOne = s.split("").sort().join("");
+        let splitTwo = t.split("").sort().join("");
+
+        return splitOne === splitTwo;
+    }
+
 }
 
 let leetcode = new LeetcodeChallenges;
-cc(leetcode.maximumSubArray([5,4,-1,7,8]));
 
 
 /*
@@ -95,5 +101,6 @@ cc(leetcode.twoSum([1, 3, 5, 7, 9, 11], 8))
 cc(leetcode.containsDuplicate([1,2,3]))
 cc(leetcode.productExceptSelf([-1,1,0,-3,3]))
 cc(leetcode.productExceptSelfV2([-1,1,0,-3,3]))
-
+cc(leetcode.maximumSubArray([5,4,-1,7,8]));
+cc(leetcode.isAnagram("anagram", "nagaram"));
 */
