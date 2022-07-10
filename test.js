@@ -73,42 +73,20 @@ class LeetcodeChallenges {
     }
 
     maximumSubArray(nums){
-        let arr = nums;
-        let tempArr = [];
-        let reverseArr = [];
-        let forwardArr = [];
+        let testSum = 0;
+        let largestFoundSum = -Infinity;
 
-        for (let i = 0; i < arr.length; i++){
-            for (let j = arr.length-1; j >= i; j--){
-                reverseArr.push(arr[j]);
-
-            }
-            tempArr.push(reverseArr);
-            reverseArr = [];
-
-            for (let k = i; k < arr.length; k++){
-                forwardArr.push(arr[k]);
-            }
-/*            tempArr.push(forwardArr);
-            forwardArr = [];*/
+        for (let i = 0; i < nums.length; i++){
+            testSum = Math.max(testSum + nums[i], nums[i]);
+            if (testSum > largestFoundSum) largestFoundSum = +testSum;
         }
-
-        let sums = [];
-
-cc(tempArr)
-        for (let i = 0; i < tempArr.length; i++){
-            let sum = tempArr[i].reduce((a, b) => a + b);
-            sums.push(sum);
-        }
-
-        let max = sums.reduce((a, b) => a > b ? a : b)
-
-        return max
+        return largestFoundSum;
     }
+
 }
 
 let leetcode = new LeetcodeChallenges;
-cc(leetcode.maximumSubArray([-2,1,-3,4,-1,2,1,-5,4]));
+cc(leetcode.maximumSubArray([5,4,-1,7,8]));
 
 
 /*
