@@ -90,10 +90,39 @@ class LeetcodeChallenges {
         return splitOne === splitTwo;
     }
 
+    groupAnagrams(strs){ // Does not meet requirements due to rearranging letters.
+        let newArr = [];
+        let tempArr = [];
+        let entries = strs;
+
+        for (let i = 0; i < entries.length; i++){
+            entries[i] = entries[i].split("").sort().join("");
+        }
+
+        let groupedEntries = [];
+        let iteration = -1;
+
+        while (entries.length > 0){
+            let findThis = entries[0];
+            iteration++;
+            groupedEntries[iteration] = [];
+            for (let i = 0; i < entries.length; i++){
+                if (JSON.stringify(findThis) === JSON.stringify(entries[i])){
+                    groupedEntries[iteration].push(entries[i]);
+                    entries.splice(i, 1);
+
+                }
+            }
+        }
+        return groupedEntries;
+    }
+
+
+
 }
 
 let leetcode = new LeetcodeChallenges;
-
+cc(leetcode.groupAnagramsV2(["eat","tea","tan","ate","nat","bat"]));
 
 /*
 cc(leetcode.maxProfit([7,1,5,3,6,4]));
@@ -103,4 +132,5 @@ cc(leetcode.productExceptSelf([-1,1,0,-3,3]))
 cc(leetcode.productExceptSelfV2([-1,1,0,-3,3]))
 cc(leetcode.maximumSubArray([5,4,-1,7,8]));
 cc(leetcode.isAnagram("anagram", "nagaram"));
+cc(leetcode.groupAnagrams(["eat","tea","tan","ate","nat","bat"]));
 */
