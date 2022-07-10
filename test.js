@@ -117,7 +117,34 @@ class LeetcodeChallenges {
         return groupedEntries;
     }
 
+    groupAnagramsV2(strs){
+        let newArr = [];
+        let tempArr = [];
+        let entries = [...strs];
+        let unsortedEntries = [...strs];
 
+        for (let i = 0; i < entries.length; i++){
+            entries[i] = entries[i].split("").sort().join("");
+        }
+
+        let groupedEntries = [];
+        let iteration = -1;
+
+        while (entries.length > 0){
+            let findThis = entries[0];
+            iteration++;
+            groupedEntries[iteration] = [];
+            for (let i = 0; i < entries.length; i++){
+                if (JSON.stringify(findThis) === JSON.stringify(entries[i])){
+                    groupedEntries[iteration].push(unsortedEntries[i]);
+                    entries.splice(i, 1);
+                    unsortedEntries.splice(i, 1);
+                    i--
+                }
+            }
+        }
+        return groupedEntries;
+    }
 
 }
 
