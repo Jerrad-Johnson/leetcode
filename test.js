@@ -168,10 +168,37 @@ class LeetcodeChallenges {
         return solutions;
     }
 
+    topKFrequentV2(nums, k){
+        let map = {};
+
+        for (let num of nums){
+            map[num] > 0 ? map[num] += 1 : map[num] = 1;
+        }
+
+        let counts = Object.values(map)
+        let solutionsValues = [];
+
+        for (let i = 0; i < k; i++){
+            let solution = Math.max(...counts);
+            let solutionPosition = counts.indexOf(solution);
+            solutionsValues.push(+solution);
+            counts.splice(solutionPosition, 1);
+        }
+
+        let solutionKey = [];
+
+        for (let i = 0; i < solutionsValues.length; i++){
+            let tempKey = Object.keys(map).find(entry => map[entry] === solutionsValues[i]);
+            solutionKey.push(+tempKey);
+            delete map[tempKey];
+        }
+
+        return solutionKey;
+    }
+
 }
 
 let leetcode = new LeetcodeChallenges;
-cc(leetcode.topKFrequent([1,1,1,2,2,3], 2));
 
 /*
 cc(leetcode.maxProfit([7,1,5,3,6,4]));
@@ -183,4 +210,6 @@ cc(leetcode.maximumSubArray([5,4,-1,7,8]));
 cc(leetcode.isAnagram("anagram", "nagaram"));
 cc(leetcode.groupAnagrams(["eat","tea","tan","ate","nat","bat"]));
 cc(leetcode.groupAnagramsV2(["eat","tea","tan","ate","nat","bat"]));
+cc(leetcode.topKFrequent([1,1,1,2,2,3], 2));
+cc(leetcode.topKFrequentV2([1, 2], 2));
 */
