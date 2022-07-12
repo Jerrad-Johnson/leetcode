@@ -196,9 +196,77 @@ class LeetcodeChallenges {
         return solutionKey;
     }
 
+    isValidSudoku(board) {
+        let columns = [];
+        let blocks = [];
+
+        for (let i = 0; i < board.length; i++){
+            columns[i] = [];
+            for (let j = 0; j < board.length; j++){
+                columns[i][j] = board[j][i]
+            }
+        }
+
+        let horizontalCounter = 0;
+        let verticalCounter = 0;
+        let iteration = 0;
+
+        for (; iteration < board.length; ){
+            blocks.push(getBlockHorizontalValues(iteration, horizontalCounter, board));
+            verticalCounter++;
+            horizontalCounter += 3;
+            if (horizontalCounter === 9) horizontalCounter = 0;
+            if (verticalCounter === 3) { iteration += 3; verticalCounter = 0; }
+        }
+
+        function getBlockHorizontalValues(vertical, horizontal, board){
+            let tempArr = [];
+            let counter = 0;
+
+            for (let i = vertical; i < vertical+3; i++){
+                for (let h = horizontal; h < horizontal+3; h++){
+                    tempArr[counter] = board[i][h]
+                    counter++;
+                }
+            }
+            return tempArr;
+        }
+
+        let dataset = [...board, ...columns, ...blocks]
+
+        function checkEntries(dataset) {
+            let rowIteration = 0;
+            let rowMap = [];
+            for (let row of dataset) {
+                rowMap[rowIteration] = {}
+
+                for (let i = 0; i < row.length; i++) {
+                    if (!rowMap[rowIteration][row[i]] && row[i] !== ".") {
+                        rowMap[rowIteration][row[i]] = 1;
+                    } else if (rowMap[rowIteration][row[i]] && row[i] !== ".") {
+                        return false;
+                    }
+                }
+                rowIteration++;
+            }
+            return true;
+        }
+
+        return checkEntries(dataset)
+    }
 }
 
 let leetcode = new LeetcodeChallenges;
+cc(leetcode.isValidSudoku([
+     ["5","3",".",".","7",".",".",".","."]
+    ,["6",".",".","1","9","5",".",".","."]
+    ,[".","9","8",".",".",".",".","6","."]
+    ,["8",".",".",".","6",".",".",".","3"]
+    ,["4",".",".","8",".","3",".",".","1"]
+    ,["7",".",".",".","2",".",".",".","6"]
+    ,[".","6",".",".",".",".","2","8","."]
+    ,[".",".",".","4","1","9",".",".","5"]
+    ,[".",".",".",".","8",".",".","7","9"]]));
 
 /*
 cc(leetcode.maxProfit([7,1,5,3,6,4]));
