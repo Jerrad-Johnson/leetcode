@@ -254,19 +254,38 @@ class LeetcodeChallenges {
 
         return checkEntries(dataset)
     }
+
+    longestConsecutive(nums){
+        if (nums.length === 0) return 0;
+        let sequence = nums.sort((a, b) => a - b);
+        let longestSequence = [sequence[0]];
+        let currentSequence = [sequence[0]];
+        let last = sequence[0];
+
+        for (let i = 1; i < sequence.length; i++) {
+            if (sequence[i] === last) continue
+            if (sequence[i] === last + 1) {
+                currentSequence.push(sequence[i]);
+            } else {
+                currentSequence = [sequence[i]];
+            }
+
+            if (currentSequence.length > longestSequence.length) longestSequence = currentSequence;
+            last = sequence[i];
+        }
+
+        return longestSequence.length;
+    }
+
+    isPalindrome(s) {
+        return s.replace(/[^a-z0-9]/gi,'').toLowerCase() === s.replace(/[^a-z0-9]/gi,'').toLowerCase().split("").reverse().join("")
+    }
+
+
 }
 
 let leetcode = new LeetcodeChallenges;
-cc(leetcode.isValidSudoku([
-     ["5","3",".",".","7",".",".",".","."]
-    ,["6",".",".","1","9","5",".",".","."]
-    ,[".","9","8",".",".",".",".","6","."]
-    ,["8",".",".",".","6",".",".",".","3"]
-    ,["4",".",".","8",".","3",".",".","1"]
-    ,["7",".",".",".","2",".",".",".","6"]
-    ,[".","6",".",".",".",".","2","8","."]
-    ,[".",".",".","4","1","9",".",".","5"]
-    ,[".",".",".",".","8",".",".","7","9"]]));
+
 
 /*
 cc(leetcode.maxProfit([7,1,5,3,6,4]));
@@ -280,4 +299,16 @@ cc(leetcode.groupAnagrams(["eat","tea","tan","ate","nat","bat"]));
 cc(leetcode.groupAnagramsV2(["eat","tea","tan","ate","nat","bat"]));
 cc(leetcode.topKFrequent([1,1,1,2,2,3], 2));
 cc(leetcode.topKFrequentV2([1, 2], 2));
+cc(leetcode.isValidSudoku([
+     ["5","3",".",".","7",".",".",".","."]
+    ,["6",".",".","1","9","5",".",".","."]
+    ,[".","9","8",".",".",".",".","6","."]
+    ,["8",".",".",".","6",".",".",".","3"]
+    ,["4",".",".","8",".","3",".",".","1"]
+    ,["7",".",".",".","2",".",".",".","6"]
+    ,[".","6",".",".",".",".","2","8","."]
+    ,[".",".",".","4","1","9",".",".","5"]
+    ,[".",".",".",".","8",".",".","7","9"]]));
+cc(leetcode.longestConsecutive([1,2,0,1]));
+cc(leetcode.isPalindrome("A man, a plan, a canal: Panama"))
 */
