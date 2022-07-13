@@ -212,14 +212,14 @@ class LeetcodeChallenges {
         let iteration = 0;
 
         for (; iteration < board.length; ){
-            blocks.push(getBlockHorizontalValues(iteration, horizontalCounter, board));
+            blocks.push(getBlockValues(iteration, horizontalCounter, board));
             verticalCounter++;
             horizontalCounter += 3;
             if (horizontalCounter === 9) horizontalCounter = 0;
             if (verticalCounter === 3) { iteration += 3; verticalCounter = 0; }
         }
 
-        function getBlockHorizontalValues(vertical, horizontal, board){
+        function getBlockValues(vertical, horizontal, board){
             let tempArr = [];
             let counter = 0;
 
