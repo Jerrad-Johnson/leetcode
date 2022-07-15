@@ -301,7 +301,7 @@ class LeetcodeChallenges {
             if (memo[numbers[i]]) continue
             last = numbers[i];
             memo[numbers[i]] = 1;
-            cc(memo)
+
             for (let j = i+1; j < numbers.length; j++){
                 if (last + numbers[j] === target) return [i+1, j+1];
             }
