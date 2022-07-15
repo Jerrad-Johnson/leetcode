@@ -293,12 +293,28 @@ class LeetcodeChallenges {
         }
     }
 
+    twoSumIIV2(numbers, target){
+        let last;
+        let memo = [];
+
+        for (let i = 0; i < numbers.length; i++){
+            if (memo[numbers[i]]) continue
+            last = numbers[i];
+            memo[numbers[i]] = 1;
+            cc(memo)
+            for (let j = i+1; j < numbers.length; j++){
+                if (last + numbers[j] === target) return [i+1, j+1];
+            }
+        }
+    }
+
+
 
 
 }
 
 let leetcode = new LeetcodeChallenges;
-cc(leetcode.twoSumII([-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, 1, 2, 3], 3));
+cc(leetcode.twoSumIIV2([2,7,11,15], 26));
 
 /*
 cc(leetcode.maxProfit([7,1,5,3,6,4]));
