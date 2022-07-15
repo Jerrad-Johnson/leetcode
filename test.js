@@ -308,13 +308,48 @@ class LeetcodeChallenges {
         }
     }
 
+    threeSum(nums){ // Time limit exceeded.
+        let arr = [...nums];
+        let sets = [];
+
+        for (let i = 0; i < arr.length; i++){
+            for (let j = i+1; j < arr.length; j++){
+                for (let k = j+1; k < arr.length; k++){
+                    if (arr[i] + arr[j] + arr[k] === 0) sets.push([arr[i], arr[j], arr[k]])
+                }
+            }
+        }
+
+        let sortedArr = [...sets];
+
+        for (let entry of sortedArr){
+            entry.sort()
+        }
+
+        let toRemove = [];
+
+        for (let i = 0; i < sortedArr.length; i++){
+            for (let j = i+1; j < sortedArr.length; j++){
+                if (JSON.stringify(sortedArr[i]) === JSON.stringify(sortedArr[j])) toRemove[j] = 1;
+            }
+        }
+
+        toRemove.forEach((e, i) => {
+           sets[i] = undefined;
+        });
+
+        sets = sets.filter((e) => e !== undefined)
+
+        return sets;
+    }
+
 
 
 
 }
 
 let leetcode = new LeetcodeChallenges;
-cc(leetcode.twoSumIIV2([2,7,11,15], 26));
+cc(leetcode.threeSum([-1,0,1,2,-1,-4]))
 
 /*
 cc(leetcode.maxProfit([7,1,5,3,6,4]));
@@ -340,4 +375,5 @@ cc(leetcode.isValidSudoku([
     ,[".",".",".",".","8",".",".","7","9"]]));
 cc(leetcode.longestConsecutive([1,2,0,1]));
 cc(leetcode.isPalindrome("A man, a plan, a canal: Panama"))
+cc(leetcode.twoSumIIV2([2,7,11,15], 26));
 */
