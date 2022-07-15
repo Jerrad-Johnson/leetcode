@@ -281,11 +281,24 @@ class LeetcodeChallenges {
         return s.replace(/[^a-z0-9]/gi,'').toLowerCase() === s.replace(/[^a-z0-9]/gi,'').toLowerCase().split("").reverse().join("")
     }
 
+    twoSumII(numbers, target){
+        let last;
+
+        for (let i = 0; i < numbers.length; i++){
+            if (numbers[i] === last) continue
+            last = numbers[i];
+            for (let j = i+1; j < numbers.length; j++){
+                if (last + numbers[j] === target) return [i+1, j+1];
+            }
+        }
+    }
+
+
 
 }
 
 let leetcode = new LeetcodeChallenges;
-
+cc(leetcode.twoSumII([-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, 1, 2, 3], 3));
 
 /*
 cc(leetcode.maxProfit([7,1,5,3,6,4]));
